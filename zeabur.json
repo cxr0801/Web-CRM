@@ -1,0 +1,16 @@
+{
+  "name": "ai-smart-clinic-crm",
+  "services": [
+    {
+      "name": "frontend",
+      "buildCommand": "npm run build",
+      "startCommand": "npx vite preview --host 0.0.0.0 --port $PORT",
+      "outputDirectory": "dist"
+    },
+    {
+      "name": "backend",
+      "buildCommand": "npx prisma generate",
+      "startCommand": "npm run start"
+    }
+  ]
+}

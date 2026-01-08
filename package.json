@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build && npx prisma generate",
     "start": "tsx server.ts",
+    "preview": "vite preview --host 0.0.0.0 --port $PORT",
     "db:push": "npx prisma db push",
-    "db:studio": "npx prisma studio"
+    "db:studio": "npx prisma studio",
+    "postinstall": "npx prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
