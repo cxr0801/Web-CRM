@@ -1,6 +1,6 @@
 import React from 'react';
 import { Project } from '../types';
-import { FileText, ChevronRight, Clock, Stethoscope, User } from 'lucide-react';
+import { ChevronRight, Clock, Stethoscope, User } from 'lucide-react';
 import { CATEGORIES } from '../constants';
 
 interface ProjectCardProps {
