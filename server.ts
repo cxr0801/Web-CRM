@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+// @ts-ignore
 import { PrismaClient } from '@prisma/client';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,12 +14,12 @@ const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json() as any);
 
 // API Routes
 
 // 1. Get All Patients
-app.get('/api/patients', async (req, res) => {
+app.get('/api/patients', async (_req, res) => {
   try {
     const patients = await prisma.patient.findMany({
       orderBy: { updatedAt: 'desc' }
@@ -42,7 +43,7 @@ app.post('/api/patients', async (req, res) => {
 });
 
 // 3. Get Dashboard Appointments (Projects)
-app.get('/api/appointments', async (req, res) => {
+app.get('/api/appointments', async (_req, res) => {
   try {
     const appointments = await prisma.appointment.findMany({
       include: {
@@ -55,7 +56,7 @@ app.get('/api/appointments', async (req, res) => {
     });
     
     // Transform to match frontend "Project" type
-    const formatted = appointments.map(app => ({
+    const formatted = appointments.map((app: any) => ({
       id: app.id.toString(),
       day: new Date(app.date).getDate(),
       category: app.category,
@@ -115,9 +116,9 @@ app.post('/api/login', async (req, res) => {
 
 // Serve Static Files (Frontend) in Production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'dist')));
+  app.use(express.static(path.join(__dirname, 'dist')) as any);
   
-  app.get('*', (req, res) => {
+  app.get('*', (_req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
 }

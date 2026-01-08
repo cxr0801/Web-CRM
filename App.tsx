@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, LayoutGrid, List, Filter, ArrowDownUp } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import StatsCard from './components/StatsCard';

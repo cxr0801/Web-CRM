@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Activity, ArrowRight, Github, AlertCircle, CheckCircle } from 'lucide-react';
+import { Mail, Lock, Activity, ArrowRight, Github, AlertCircle, CheckCircle, Info } from 'lucide-react';
 import { User } from '../types';
 
 interface LoginPageProps {
@@ -191,6 +191,40 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     <ArrowRight size={16} />
                 </button>
             </form>
+
+            {/* Demo Credentials Hint */}
+            {!isRegistering && (
+              <div className="mt-6 p-4 bg-slate-50 rounded-xl border border-slate-200/60">
+                 <div className="flex items-center gap-2 mb-3 text-slate-800 font-semibold text-xs uppercase tracking-wide">
+                    <Info size={14} className="text-blue-500" />
+                    演示帳號 (Demo Accounts)
+                 </div>
+                 <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs p-2 bg-white rounded-lg border border-slate-100 shadow-sm group cursor-pointer hover:border-blue-200 transition-colors"
+                         onClick={() => { setEmail('doctor@clinic.com'); setPassword('password123'); }}>
+                        <div className="flex flex-col">
+                            <span className="font-bold text-slate-700">👨‍⚕️ 醫師 (Doctor)</span>
+                            <span className="text-slate-400 mt-0.5">Full Access</span>
+                        </div>
+                        <div className="text-right font-mono text-slate-500 bg-slate-50 px-2 py-1 rounded">
+                            <div>doctor@clinic.com</div>
+                            <div>password123</div>
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between text-xs p-2 bg-white rounded-lg border border-slate-100 shadow-sm group cursor-pointer hover:border-blue-200 transition-colors"
+                         onClick={() => { setEmail('nurse@clinic.com'); setPassword('nurse'); }}>
+                        <div className="flex flex-col">
+                            <span className="font-bold text-slate-700">👩‍⚕️ 護理師 (Nurse)</span>
+                            <span className="text-slate-400 mt-0.5">Limited Access</span>
+                        </div>
+                         <div className="text-right font-mono text-slate-500 bg-slate-50 px-2 py-1 rounded">
+                            <div>nurse@clinic.com</div>
+                            <div>nurse</div>
+                        </div>
+                    </div>
+                 </div>
+              </div>
+            )}
 
             <div className="relative my-6">
                 <div className="absolute inset-0 flex items-center">

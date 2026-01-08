@@ -1,3 +1,4 @@
+// @ts-ignore
 import { PrismaClient } from '@prisma/client';
 import { PATIENT_RECORDS, PROJECTS } from '../constants';
 
@@ -31,7 +32,7 @@ async function main() {
 
   // 2. Create Patients from constants
   for (const p of PATIENT_RECORDS) {
-    const createdPatient = await prisma.patient.upsert({
+    await prisma.patient.upsert({
       where: { recordId: p.id },
       update: {},
       create: {
