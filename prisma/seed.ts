@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { PATIENT_RECORDS, PROJECTS } from '../constants.js';
+import { PATIENT_RECORDS, PROJECTS } from '../constants';
 
 const prisma = new PrismaClient();
 
