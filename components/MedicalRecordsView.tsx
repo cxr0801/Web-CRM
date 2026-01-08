@@ -98,7 +98,7 @@ const MedicalRecordsView: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {filteredRecords.length > 0 ? filteredRecords.map((record, index) => (
+                {filteredRecords.length > 0 ? filteredRecords.map((record) => (
                   <tr key={record.id} className="hover:bg-blue-50/30 transition-colors whitespace-nowrap group">
                     <td className="px-5 py-4 font-semibold text-slate-800 sticky left-0 bg-white group-hover:bg-blue-50/30 border-r border-slate-100 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)]">
                       {record.name}

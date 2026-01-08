@@ -47,51 +47,42 @@ app.get('/api/appointments', async (_req, res) => {
   try {
     const appointments = await prisma.appointment.findMany({
       include: {
-        patient: true,
-        doctor: {
-          select: { name: true }
-        }
+        patient: true
       },
-      orderBy: { date: 'desc' }
+      orderBy: { updatedAt: 'desc' }
     });
-    
+
     // Transform to match frontend "Project" type
     const formatted = appointments.map((app: any) => ({
-      id: app.id.toString(),
-      day: new Date(app.date).getDate(),
+      id: app.id,
+      day: app.day,
       category: app.category,
       title: app.title,
-      description: app.description,
-      tags: app.tags.split(','),
-      date: new Date(app.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      description: app.description || '',
+      tags: app.tags,
+      date: app.date,
       link: '#',
-      physician: app.doctor.name,
-      status: app.status // Include status for collaboration
+      physician: app.physician
     }));
-    
+
     res.json(formatted);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch appointments' });
   }
 });
 
-// 4. Update Appointment Status (Collaboration Feature)
-// e.g., Doctor marks as "COMPLETED", Counter sees it and processes payment
-app.patch('/api/appointments/:id/status', async (req, res) => {
+// 4. Update Appointment
+app.patch('/api/appointments/:id', async (req, res) => {
   const { id } = req.params;
-  const { status, prescription } = req.body;
-  
+
   try {
     const updated = await prisma.appointment.update({
-      where: { id: Number(id) },
-      data: { 
-        status,
-        ...(prescription && { prescription })
-      }
+      where: { id },
+      data: req.body
     });
     res.json(updated);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update status' });
+    res.status(500).json({ error: 'Failed to update appointment' });
   }
 });
 
