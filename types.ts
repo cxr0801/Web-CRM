@@ -53,3 +53,15 @@ export interface PatientRecord {
 
 export type ViewMode = 'grid' | 'list';
 export type PageView = 'dashboard' | 'records' | 'inventory' | 'recordDetail';
+
+export type UserRole = 'admin' | 'doctor' | 'staff';
+
+export interface User {
+  id?: number;
+  email: string;
+  password?: string; // In real app, store hash only
+  name: string;
+  role: UserRole;
+  avatar?: string;
+  createdAt: Date;
+}

@@ -1,14 +1,15 @@
 import React from 'react';
-import { LayoutGrid, FolderOpen, Lightbulb, Settings, Activity } from 'lucide-react';
+import { LayoutGrid, FolderOpen, Lightbulb, Settings, Activity, LogOut } from 'lucide-react';
 import { NAV_ITEMS } from '../constants';
 import { PageView } from '../types';
 
 interface SidebarProps {
   currentPage: PageView;
   onNavigate: (page: PageView) => void;
+  onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ currentPage, onNavigate }) => {
+const Sidebar: React.FC<SidebarProps> = ({ currentPage, onNavigate, onLogout }) => {
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'LayoutGrid': return <LayoutGrid size={20} />;
@@ -64,10 +65,19 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPage, onNavigate }) => {
             </div>
         </div>
         
-        <button className="flex items-center gap-3 px-2 py-2 text-sm hover:text-white transition-colors w-full">
-            <Settings size={18} />
-            系統設定
-        </button>
+        <div className="space-y-1">
+            <button className="flex items-center gap-3 px-2 py-2 text-sm hover:text-white transition-colors w-full rounded hover:bg-slate-800/50">
+                <Settings size={18} />
+                系統設定
+            </button>
+            <button 
+                onClick={onLogout}
+                className="flex items-center gap-3 px-2 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors w-full rounded"
+            >
+                <LogOut size={18} />
+                登出系統
+            </button>
+        </div>
       </div>
     </aside>
   );
